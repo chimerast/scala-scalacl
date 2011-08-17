@@ -47,9 +47,9 @@ object TestWithout {
     {
       implicit val context = Context.best(CPU)
       profile("off.nor.tuple") { vec } { tuples =>
-        tuples.map {
-          case (a, b) =>
-            a._1 * b._1 + a._2 * b._2 + a._3 * b._3 + a._4 * b._4
+        tuples.map { t =>
+          val (a, b) = t
+          a._1 * b._1 + a._2 * b._2 + a._3 * b._3 + a._4 * b._4
         }.sum
       }
     }
@@ -57,9 +57,9 @@ object TestWithout {
     {
       implicit val context = Context.best(CPU)
       profile("off.par.tuple") { vec.par } { array =>
-        array.map {
-          case (a, b) =>
-            a._1 * b._1 + a._2 * b._2 + a._3 * b._3 + a._4 * b._4
+        array.map { t =>
+          val (a, b) = t
+          a._1 * b._1 + a._2 * b._2 + a._3 * b._3 + a._4 * b._4
         }.sum
       }
     }
