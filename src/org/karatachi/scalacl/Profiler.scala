@@ -19,7 +19,11 @@ object Profiler {
    * @param block 計測するブロック
    */
   def profile[T](title: String)(init: => T)(block: T => Unit): Unit = {
+    System.gc
+
     var result = List[Long]()
+
+    println("%s: start".format(title))
 
     var i = trials
     while ({ i -= 1; i >= 0 }) {

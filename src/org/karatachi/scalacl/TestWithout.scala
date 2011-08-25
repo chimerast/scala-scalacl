@@ -23,18 +23,50 @@ object TestWithout {
     /*
      * loop内でcos()を呼び出す
      */
-    profile("off.nor.loopcos") { gen } { rng =>
+    profile("off.nor.loopcos1") { gen } { rng =>
       rng.map { x =>
         var total = 0.0
-        for (i <- 0 until 16) { total += cos(x * i) }
+        for (i <- 0 until 1) { total += cos(x * i) }
         total
       }.sum
     }
 
-    profile("off.par.loopcos") { gen.par } { rng =>
+    profile("off.par.loopcos1") { gen.par } { rng =>
       rng.map { x =>
         var total = 0.0
-        for (i <- 0 until 16) { total += cos(x * i) }
+        for (i <- 0 until 1) { total += cos(x * i) }
+        total
+      }.sum
+    }
+
+    profile("off.nor.loopcos10") { gen } { rng =>
+      rng.map { x =>
+        var total = 0.0
+        for (i <- 0 until 10) { total += cos(x * i) }
+        total
+      }.sum
+    }
+
+    profile("off.par.loopcos10") { gen.par } { rng =>
+      rng.map { x =>
+        var total = 0.0
+        for (i <- 0 until 10) { total += cos(x * i) }
+        total
+      }.sum
+    }
+
+    profile("off.nor.loopcos100") { gen } { rng =>
+      rng.map { x =>
+        var total = 0.0
+        for (i <- 0 until 100) { total += cos(x * i) }
+        total
+      }.sum
+    }
+
+    profile("off.par.loopcos100") { gen.par } { rng =>
+      rng.map { x =>
+        var total = 0.0
+        for (i <- 0 until 100) { total += cos(x * i) }
         total
       }.sum
     }

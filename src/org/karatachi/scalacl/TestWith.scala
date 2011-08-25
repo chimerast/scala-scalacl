@@ -31,10 +31,10 @@ object TestWith {
      */
     {
       implicit val context = Context.best(GPU)
-      profile("on.gpu.loopcos") { gen.cl } { rng =>
+      profile("on.gpu.loopcos1") { gen.cl } { rng =>
         rng.map { x =>
           var total = 0.0
-          for (i <- 0 until 16) { total += cos(x * i) }
+          for (i <- 0 until 1) { total += cos(x * i) }
           total
         }.sum
       }
@@ -42,10 +42,54 @@ object TestWith {
 
     {
       implicit val context = Context.best(CPU)
-      profile("on.cpu.loopcos") { gen.cl } { rng =>
+      profile("on.cpu.loopcos1") { gen.cl } { rng =>
         rng.map { x =>
           var total = 0.0
-          for (i <- 0 until 16) { total += cos(x * i) }
+          for (i <- 0 until 1) { total += cos(x * i) }
+          total
+        }.sum
+      }
+    }
+
+    {
+      implicit val context = Context.best(GPU)
+      profile("on.gpu.loopcos10") { gen.cl } { rng =>
+        rng.map { x =>
+          var total = 0.0
+          for (i <- 0 until 10) { total += cos(x * i) }
+          total
+        }.sum
+      }
+    }
+
+    {
+      implicit val context = Context.best(CPU)
+      profile("on.cpu.loopcos10") { gen.cl } { rng =>
+        rng.map { x =>
+          var total = 0.0
+          for (i <- 0 until 10) { total += cos(x * i) }
+          total
+        }.sum
+      }
+    }
+
+    {
+      implicit val context = Context.best(GPU)
+      profile("on.gpu.loopcos100") { gen.cl } { rng =>
+        rng.map { x =>
+          var total = 0.0
+          for (i <- 0 until 100) { total += cos(x * i) }
+          total
+        }.sum
+      }
+    }
+
+    {
+      implicit val context = Context.best(CPU)
+      profile("on.cpu.loopcos100") { gen.cl } { rng =>
+        rng.map { x =>
+          var total = 0.0
+          for (i <- 0 until 100) { total += cos(x * i) }
           total
         }.sum
       }
